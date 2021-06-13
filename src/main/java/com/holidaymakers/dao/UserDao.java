@@ -213,7 +213,7 @@ public class UserDao {
         String sqlQuery = "select * from images where tour_id="+tour_id;
         List<Map<String, Object>> rows = jdbcTemplate.queryForList(sqlQuery);
         List<ImageDownResponse> urlResponses = new ArrayList<ImageDownResponse>();
-        String url = "http://localhost:8080/api/v1/user/getAllImages/";
+        String url = "https://holiday-makers-ef667.web.app/api/v1/user/getAllImages/";
         for (Map<String, Object> rs : rows) 
         {
             ImageDownResponse urlResponse = new ImageDownResponse((Long)rs.get("id"), (url+(Long)rs.get("id")));
