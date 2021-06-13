@@ -231,7 +231,7 @@ public class AdminDao {
         String sqlQuery = "select * from images where tour_id="+id;      
           List<Map<String, Object>> rows = jdbcTemplate.queryForList(sqlQuery);
           List<ImageDownResponse> urlResponses = new ArrayList<ImageDownResponse>();
-          String url = "http://localhost:8080/api/v1/admin/getAllImages/";
+          String url = "https://holiday-makers-ef667.web.app/api/v1/admin/getAllImages/";
           for (Map<String, Object> rs : rows) 
           {
                ImageDownResponse urlResponse = new ImageDownResponse((Long)rs.get("id"), (url+(Long)rs.get("id")));
