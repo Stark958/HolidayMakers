@@ -38,7 +38,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 @RestController
-@CrossOrigin(origins="http://localhost:3000")
+//@CrossOrigin(origins="http://localhost:3000")
+@CrossOrigin(origins="https://holiday-makers-ef667.web.app/")
 @RequestMapping(path="/api/v1/admin")
 public class AdminController {
 
