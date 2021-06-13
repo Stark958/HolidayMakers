@@ -257,7 +257,7 @@ public class AdminController {
     }
 
 
-    @GetMapping("getAllImages/{id}")
+    @GetMapping("/getAllImages/{id}")
     public ResponseEntity<byte[]> getFile(@PathVariable("id") Long id) {
         logger.info("Inside getFile() method of Controller");
         Image fileEntity = adminService.getFile(id);
