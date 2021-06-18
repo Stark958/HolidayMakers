@@ -123,9 +123,9 @@ public class AdminService {
         return adminDao.deleteIssue(issue_id);
     }  
 
-    public Boolean updatePassword( Long id, String password){
+    public Boolean updatePassword( Long id, User user){
         logger.info("Inside updatePassword() method of Service");
-        return adminDao.updatePassword(id,password);
+        return adminDao.updatePassword(id,user);
     }
 
     public  Image getFile( Long tour_id) {
