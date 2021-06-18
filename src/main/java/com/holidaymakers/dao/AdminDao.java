@@ -61,10 +61,10 @@ public class AdminDao {
 
 
     /////////////// UPDATE PASSWORD //////////////////'
-    public Boolean updatePassword(Long id, String password) {
+    public Boolean updatePassword(Long id, User user) {
       logger.info("Inside updatePassword() method in DAO");
         String sqlQuery = "UPDATE user SET password= ?  WHERE id = ?;";
-          if(jdbcTemplate.update(sqlQuery, password, id) > 0){
+          if(jdbcTemplate.update(sqlQuery, user.getPassword(), id) > 0){
               return true;
           }
           return false;
