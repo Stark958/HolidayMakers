@@ -250,7 +250,7 @@ public class AdminController {
     @PutMapping("/updatepassword/{id}")
     public ResponseEntity<?> updatePassword(@PathVariable Long id, @RequestBody User user){
         logger.info("Inside updatePassword() method of Controller");      
-         if(adminService.updatePassword(id,password)){
+         if(adminService.updatePassword(id,user)){
             return new ResponseEntity<String>("Updated", HttpStatus.OK);
         }
         return new ResponseEntity<String>("Failed", HttpStatus.OK);
