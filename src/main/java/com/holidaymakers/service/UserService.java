@@ -36,9 +36,9 @@ public class UserService {
         return userDao.register(user);
     }
 
-    public Boolean updateUser(Long id,  String password){
+    public Boolean updateUser(Long id,  User user){
         logger.info("Inside updateUser() method of Service");
-        return userDao.updateUser(id,password);
+        return userDao.updateUser(id,user);
     }
 
      ///////////////// VIEW ALL TOURS ////////////////////
