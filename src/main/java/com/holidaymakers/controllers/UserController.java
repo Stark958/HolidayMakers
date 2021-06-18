@@ -58,19 +58,19 @@ public class UserController {
         if(userService.register(user)){
             return new ResponseEntity<String>("Registered", HttpStatus.OK);
         }
-        return new ResponseEntity<String>("Failed", HttpStatus.EXPECTATION_FAILED);
+        return new ResponseEntity<String>("Failed", HttpStatus.OK);
     }
 
 
     /////////////// UPDATE PASSWORD //////////////////'
     @PutMapping("/updatepassword/{user_id}")
-    public ResponseEntity<?> updateUser(@PathVariable("user_id") Long id, @RequestParam String password){
+    public ResponseEntity<?> updateUser(@PathVariable("user_id") Long id, @RequestBody User user){
         logger.info("Inside updateUser() method of Controller");
-        if(userService.updateUser(id,password)){
+        if(userService.updateUser(id,user)){
             return new ResponseEntity<String>("Updated", HttpStatus.OK);
         }
 
-        return new ResponseEntity<String>("Failed", HttpStatus.EXPECTATION_FAILED);
+        return new ResponseEntity<String>("Failed", HttpStatus.OK);
     }
 
      ///////////////// VIEW ALL TOURS ////////////////////
@@ -79,7 +79,7 @@ public class UserController {
         logger.info("Inside viewAllTours() method of Controller");
         
         if(userService.viewAllTours().size() == 0){
-            return new ResponseEntity<String>("Not found", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<String>("Not found", HttpStatus.OK);
         }
 
         return new ResponseEntity<>(userService.viewAllTours(), HttpStatus.OK);
@@ -91,7 +91,7 @@ public class UserController {
         logger.info("Inside viewTour() method of Controller");
         
         if(userService.viewTour(tourid) == null){
-            return new ResponseEntity<String>("Not found", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<String>("Not found", HttpStatus.OK);
         }
 
         return new ResponseEntity<>(userService.viewTour(tourid), HttpStatus.OK);
@@ -104,7 +104,7 @@ public class UserController {
         logger.info("Inside addBookings() method of Controller");
         Bookings bookings1 = userService.addBooking(id,tour_id,bookings);
         if(bookings1 == null){
-            return new ResponseEntity<>("Something went wrong", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Something went wrong", HttpStatus.OK);
         }
         return new ResponseEntity<>(bookings1, HttpStatus.OK);
     }
@@ -139,7 +139,7 @@ public class UserController {
         logger.info("Inside getDetailsByBookingId() method of Controller");
         List<BookingDetails> detailsList = userService.getDetailsByBookingId(booking_id);
         if(detailsList.size() == 0){
-            return new ResponseEntity<String>("Not found", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<String>("Not found", HttpStatus.OK);
         }
         return new ResponseEntity<>(detailsList, HttpStatus.OK);
     }
@@ -151,7 +151,7 @@ public class UserController {
         if(userService.updateBookings(booking_id,bookings)){
              return new ResponseEntity<>("Updated", HttpStatus.OK);
         }
-        return new ResponseEntity<>("Failed", HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>("Failed", HttpStatus.OK);
     }
 
     
@@ -164,7 +164,7 @@ public class UserController {
          if(userService.addIssue(user_id,issue)){
              return new ResponseEntity<>("Updated", HttpStatus.OK);
         }
-        return new ResponseEntity<>("Failed", HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>("Failed", HttpStatus.OK);
     }   
 
 
@@ -176,7 +176,7 @@ public class UserController {
          if(userService.addFeedback(id,feedback)){
              return new ResponseEntity<>("Updated", HttpStatus.OK);
         }
-        return new ResponseEntity<>("Failed", HttpStatus.EXPECTATION_FAILED);
+        return new ResponseEntity<>("Failed", HttpStatus.OK);
 
     }
     
