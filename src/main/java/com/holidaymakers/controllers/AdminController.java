@@ -54,7 +54,7 @@ public class AdminController {
         logger.info("Inside getInfo() method of Controller");       
          DashboardResponse tourList = adminService.getInfo();  
         if( tourList == null ){
-            return new ResponseEntity<String>("No Tour found", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<String>("No Tour found", HttpStatus.OK);
         }
         return new ResponseEntity<>(tourList, HttpStatus.OK);
     }  
@@ -66,7 +66,7 @@ public class AdminController {
         logger.info("Inside viewAllTours() method of Controller");       
          List<TourResponse> tourList = adminService.viewAllTours();  
         if( tourList.size() == 0 ){
-            return new ResponseEntity<String>("No Tour found", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<String>("No Tour found", HttpStatus.OK);
         }
         return new ResponseEntity<>(tourList, HttpStatus.OK);
     }  
@@ -77,7 +77,7 @@ public class AdminController {
         logger.info("Inside addTour() method of Controller");
         Tour tour1 = adminService.addTour(tour);       
         if( tour1 == null){
-            return new ResponseEntity<String>("Something went wong try again later !!!", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<String>("Something went wong try again later !!!", HttpStatus.OK);
         }
         return new ResponseEntity<>(tour1, HttpStatus.OK);
     } 
@@ -89,7 +89,7 @@ public class AdminController {
         if(adminService.updateTour(id,tour)){
            return new ResponseEntity<String>("Updated", HttpStatus.OK);
         }     
-         return new ResponseEntity<String>("Failed", HttpStatus.NOT_FOUND);
+         return new ResponseEntity<String>("Failed", HttpStatus.OK);
     }  
     
      //////// GET TOUR BY TOUR ID T /////////
@@ -97,7 +97,7 @@ public class AdminController {
     public ResponseEntity<?> viewTour(@PathVariable("tour_id") Long tourid ) {   
         logger.info("Inside viewTour() method of Controller");       
         if(adminService.viewTour(tourid) == null ){
-            return new ResponseEntity<String>("No Tour Found", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<String>("No Tour Found", HttpStatus.OK);
         }
         return new ResponseEntity<>(adminService.viewTour(tourid), HttpStatus.OK);
     }  
@@ -119,7 +119,7 @@ public class AdminController {
          if(adminService.deleteTour(id)){
             return new ResponseEntity<>("Deleted", HttpStatus.OK);
          }    
-        return new ResponseEntity<String>("Failed", HttpStatus.NOT_FOUND);
+        return new ResponseEntity<String>("Failed", HttpStatus.OK);
     }  
 
     //////// ADD OR UPDATE TOUR IMAGES BY TOUR ID /////////
@@ -142,7 +142,7 @@ public class AdminController {
         if(adminService.deleteImagesById(id)){
             return new ResponseEntity<>("Deleted", HttpStatus.OK);           
         }
-        return new ResponseEntity<String>("Failed", HttpStatus.FAILED_DEPENDENCY);
+        return new ResponseEntity<String>("Failed", HttpStatus.OK);
     }
 
     //////// GET ALL BOOKINGS ////////////
@@ -151,7 +151,7 @@ public class AdminController {
         logger.info("Inside getAllBooking() method of Controller");
         List<BookingResponse> bookingResponse = adminService.getAllBooking();      
         if(bookingResponse.size() == 0){
-            return new ResponseEntity<String>("Not found", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<String>("Not found", HttpStatus.OK);
         }
         return new ResponseEntity<>(bookingResponse, HttpStatus.OK);
     }  
@@ -163,7 +163,7 @@ public class AdminController {
         if(adminService.updateBookings(booking_id, bookings)){
             return new ResponseEntity<>("Updated", HttpStatus.OK);   
         }
-        return new ResponseEntity<String>("Failed", HttpStatus.FAILED_DEPENDENCY);
+        return new ResponseEntity<String>("Failed", HttpStatus.OK);
     }
 
     //////// GET BOOKING DETAILS BY BOOKING ID ////////////
@@ -172,7 +172,7 @@ public class AdminController {
         logger.info("Inside getDetailsByBookingId() method of Controller");
         List<BookingDetails> detailsList = adminService.getDetailsByBookingId(booking_id);        
         if(detailsList.size() == 0){
-            return new ResponseEntity<String>("Not found", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<String>("Not found", HttpStatus.OK);
         }
          return new ResponseEntity<>(detailsList, HttpStatus.OK);
     }
@@ -183,7 +183,7 @@ public class AdminController {
         logger.info("Inside getUsers() method of Controller");
         List<User> users = adminService.listUsers();       
         if(users.size() == 0){
-            return new ResponseEntity<String>("Not found", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<String>("Not found", HttpStatus.OK);
         }
          return new ResponseEntity<>(users, HttpStatus.OK);
     }
@@ -195,7 +195,7 @@ public class AdminController {
         if(adminService.deleteUser(id)){
             return new ResponseEntity<>("Deleted", HttpStatus.OK);   
         }
-        return new ResponseEntity<String>("Failed", HttpStatus.FAILED_DEPENDENCY);
+        return new ResponseEntity<String>("Failed", HttpStatus.OK);
     }
 
 
@@ -205,7 +205,7 @@ public class AdminController {
         logger.info("Inside listIssue() method of Controller");     
         List<IssueResponse> issueList = adminService.listIssue();
         if(issueList.size() == 0){
-             return new ResponseEntity<String>("Not found", HttpStatus.NOT_FOUND);
+             return new ResponseEntity<String>("Not found", HttpStatus.OK);
         }
         return new ResponseEntity<>(issueList, HttpStatus.OK);
     }  
@@ -217,7 +217,7 @@ public class AdminController {
 		Issue issue= adminService.getIssuebyId(id);
 		if(issue == null) {
 			logger.warn("Cannot find issue with id: "+id);
-			return new ResponseEntity<String>("No Issue found with this id: "+id, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<String>("No Issue found with this id: "+id, HttpStatus.OK);
 		}
 		else {
 			return new ResponseEntity<Issue>(issue, HttpStatus.OK);
@@ -232,7 +232,7 @@ public class AdminController {
         if(adminService.replyIssue(issue_id,issue)){
             return new ResponseEntity<String>("Updated", HttpStatus.OK);
         }
-        return new ResponseEntity<String>("Failed", HttpStatus.EXPECTATION_FAILED);
+        return new ResponseEntity<String>("Failed", HttpStatus.OK);
     }  
 
 
@@ -241,17 +241,17 @@ public class AdminController {
     public ResponseEntity<?> deleteIssue(@PathVariable("issue_id") Long issue_id){
         logger.info("Inside deleteIssue() method of Controller");        
          if(adminService.deleteIssue(issue_id)){
-            return new ResponseEntity<String>("Deleted", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<String>("Deleted", HttpStatus.OK);
         }
         return new ResponseEntity<String>("Failed", HttpStatus.OK);
     }  
 
      /////////////// UPDATE PASSWORD //////////////////'
     @PutMapping("/updatepassword/{id}")
-    public ResponseEntity<?> updatePassword(@PathVariable Long id, @RequestParam String password){
+    public ResponseEntity<?> updatePassword(@PathVariable Long id, @RequestBody User user){
         logger.info("Inside updatePassword() method of Controller");      
          if(adminService.updatePassword(id,password)){
-            return new ResponseEntity<String>("Updated", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<String>("Updated", HttpStatus.OK);
         }
         return new ResponseEntity<String>("Failed", HttpStatus.OK);
     }
