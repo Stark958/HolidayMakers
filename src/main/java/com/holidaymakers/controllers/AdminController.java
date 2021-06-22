@@ -54,7 +54,7 @@ public class AdminController {
         logger.info("Inside getInfo() method of Controller");       
          DashboardResponse tourList = adminService.getInfo();  
         if( tourList == null ){
-            return new ResponseEntity<String>("No Tour found", HttpStatus.OK);
+            return new ResponseEntity<String>("Not found", HttpStatus.OK);
         }
         return new ResponseEntity<>(tourList, HttpStatus.OK);
     }  
@@ -97,7 +97,7 @@ public class AdminController {
     public ResponseEntity<?> viewTour(@PathVariable("tour_id") Long tourid ) {   
         logger.info("Inside viewTour() method of Controller");       
         if(adminService.viewTour(tourid) == null ){
-            return new ResponseEntity<String>("No Tour Found", HttpStatus.OK);
+            return new ResponseEntity<String>("Not Found", HttpStatus.OK);
         }
         return new ResponseEntity<>(adminService.viewTour(tourid), HttpStatus.OK);
     }  
@@ -217,7 +217,7 @@ public class AdminController {
 		Issue issue= adminService.getIssuebyId(id);
 		if(issue == null) {
 			logger.warn("Cannot find issue with id: "+id);
-			return new ResponseEntity<String>("No Issue found with this id: "+id, HttpStatus.OK);
+			return new ResponseEntity<String>("Not found"+id, HttpStatus.OK);
 		}
 		else {
 			return new ResponseEntity<Issue>(issue, HttpStatus.OK);
